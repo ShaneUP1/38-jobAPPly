@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  margin: 5px;
+}
+textarea {
+  resize: none;
+}
+button {
+  margin: 5px;
+}

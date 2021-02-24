@@ -1,27 +1,68 @@
 /* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './JobForm.module.css';
 
 const JobForm = ({ company, appliedDate, responseDate, url, notes, onSubmit, onChange }) => (
-  <form onSubmit={onSubmit}>
-    <label htmlFor="company">Company</label>
-    <input id="company" name="company" type="string" value={company} onChange={onChange} />
-  
+  <form onSubmit={onSubmit} className={styles.form}>
+    <label htmlFor="company">
+      Company
+    </label>
+    <input
+      id="company"
+      name="company"
+      type="string"
+      value={company}
+      onChange={onChange}
+    />
     <div className="form-dates">
-      <label htmlFor="appliedDate">Date Applied</label>
-      <input id="appliedDate" name="appliedDate" type="date" value={appliedDate} onChange={onChange} />
-      
-      <label htmlFor="responseDate">Response Date</label>
-      <input id="responseDate" name="responseDate" type="date" value={responseDate} onChange={onChange} />
+      <label htmlFor="appliedDate">
+        Date Applied
+      </label>
+      <input
+        id="appliedDate"
+        name="appliedDate"
+        type="date"
+        value={appliedDate}
+        onChange={onChange}
+      />
+      <label htmlFor="responseDate">
+        Response Date
+      </label>
+      <input
+        id="responseDate"
+        name="responseDate"
+        type="date"
+        value={responseDate}
+        onChange={onChange}
+      />
     </div>
-
-    <label htmlFor="url">Job Posting URL</label>
-    <input id="url" name="url" type="string" value={url} onChange={onChange} />
-    
-    <label htmlFor="notes">Notes</label>
-    <textarea id="notes" name="notes" value={notes} onChange={onChange} rows="10" cols="20"/>
-    
-    <button>Submit</button>
+    <label htmlFor="url">
+      Job Posting URL
+    </label>
+    <input
+      id="url"
+      name="url"
+      type="url"
+      placeholder="https://example.com"
+      style={{ width: '30em' }}
+      value={url}
+      onChange={onChange}
+    />
+    <label htmlFor="notes">
+      Notes
+    </label>
+    <textarea
+      id="notes"
+      name="notes"
+      value={notes}
+      onChange={onChange}
+      rows="20"
+      cols="40"
+    />
+    <button>
+      Submit
+    </button>
   </form>
 );
 

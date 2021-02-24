@@ -1,21 +1,25 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import JobForm from '../components/app/form/JobForm';
-import JobPostList from '../components/jobs/JobPostList';
-import { createJob, fetchJobs } from '../services/jobApplyBe';
+import { getJobToUpdate, updateJob } from '../services/jobApplyBe';
 
-const Main = () => {
+const UpdatePage = ({ match }) => {
   const [company, setCompany] = useState('');
   const [appliedDate, setAppliedDate] = useState('');
   const [responseDate, setResponseDate] = useState('');
   const [url, setUrl] = useState('');
   const [notes, setNotes] = useState('');
-  const [jobsList, setJobsList] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
-    fetchJobs()
-      .then(jobs => setJobsList(ls => [...ls, ...jobs]));
+    getJobToUpdate(match.params.id)
+      .then(job => {
+        setCompany(job.company);
+        setAppliedDate(job.appliedDate);
+        setResponseDate(job.responseDate);
+        setUrl(job.url);
+        setNotes(job.notes);
+      });
   }, []);
 
   const handleChange = ({ target }) => {
@@ -26,21 +30,17 @@ const Main = () => {
     if(target.name === 'url') setUrl(value);
     if(target.name === 'notes') setNotes(value);
   };
-
+  
   const handleSubmit = e => {
     e.preventDefault();
-    createJob({ company, appliedDate, responseDate, url, notes })
-      .then(job => setJobsList(jobs => [...jobs, job]));
-    setCompany('');
-    setAppliedDate('');
-    setResponseDate('');
-    setUrl('');
-    setNotes('');
+    console.log();
+    updateJob(match.params.id, ({ company, appliedDate, responseDate, url, notes }));
+
+
+    // createJob({ company, appliedDate, responseDate, url, notes })
+    //   .then(job => setJobsList(jobs => [...jobs, job]));
   };
 
-  const updateClick = ({ target }) => {
-    history.push(`/update/${target.value}`);
-  };
 
   return (
     <>
@@ -53,9 +53,18 @@ const Main = () => {
         onSubmit={handleSubmit}
         onChange={handleChange}
       />
-      <JobPostList jobs={jobsList} updateClick={updateClick} />
+      
     </>
   );
 };
 
-export default Main;
+export default UpdatePage;
+
+UpdatePage.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  }).isRequired
+};
+
