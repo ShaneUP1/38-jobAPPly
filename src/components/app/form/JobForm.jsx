@@ -14,6 +14,7 @@ const JobForm = ({ company, appliedDate, responseDate, url, notes, onSubmit, onC
       type="string"
       value={company}
       onChange={onChange}
+      required
     />
     <div className="form-dates">
       <label htmlFor="appliedDate">
@@ -25,6 +26,7 @@ const JobForm = ({ company, appliedDate, responseDate, url, notes, onSubmit, onC
         type="date"
         value={appliedDate}
         onChange={onChange}
+        required
       />
       <label htmlFor="responseDate">
         Response Date
@@ -48,6 +50,7 @@ const JobForm = ({ company, appliedDate, responseDate, url, notes, onSubmit, onC
       style={{ width: '30em' }}
       value={url}
       onChange={onChange}
+      required
     />
     <label htmlFor="notes">
       Notes

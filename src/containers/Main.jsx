@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import JobForm from '../components/app/form/JobForm';
+import Login from '../components/auth/Login';
+import Signup from '../components/auth/Signup';
 import JobPostList from '../components/jobs/JobPostList';
 import { createJob, fetchJobs } from '../services/jobApplyBe';
 
