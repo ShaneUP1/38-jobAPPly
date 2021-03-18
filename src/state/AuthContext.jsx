@@ -33,11 +33,17 @@ export const AuthProvider = ({ children }) => {
       .catch(err => setError(err));
   };
 
+  const logout = ({ target }) => {
+    setSession(target.value);
+    history.push('/');
+  };
+
   return (
     <AuthContext.Provider value={{
       session,
       signup,
       login,
+      logout,
       isAuthenticated,
       error,
       loading
@@ -60,6 +66,11 @@ export const useAuthError = () => {
 export const useLogin = () => {
   const { login } = useContext(AuthContext);
   return login;
+};
+
+export const useLogout = () => {
+  const { logout } = useContext(AuthContext);
+  return logout;
 };
 
 export const useIsAuthenticated = () => {
